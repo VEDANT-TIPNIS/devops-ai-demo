@@ -15,7 +15,7 @@ class TestApplication(unittest.TestCase):
     def test_homepage(self):
         status, message = get_response("/")
         self.assertEqual(status, 200)
-        self.assertEqual(message, "AI-Assisted DevOps Demo Application")
+        self.assertEqual(message, "THIS IS A DELIBERATE FAILURE")
 
     def test_health(self):
         status, message = get_response("/health")
