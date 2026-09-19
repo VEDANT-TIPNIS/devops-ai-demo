@@ -99,7 +99,7 @@ pipeline {
 	    echo 'Starting AI failure analysis...'
 	    
             sh '''
-		python3 ai_analyzer.py test-results.log \
+		python3 ai_analyser.py test-results.log \
      	            > ai-analysis.txt 2>&1 || true
             '''
 	    
