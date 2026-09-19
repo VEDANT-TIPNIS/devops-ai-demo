@@ -8,6 +8,7 @@ pipeline {
     }
 
     environment {
+        PATH = "/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin"
         IMAGE_NAME = "ai-devops-demo:${BUILD_NUMBER}"
         CONTAINER_NAME = "ai-devops-test-${BUILD_NUMBER}"
     }
@@ -22,13 +23,24 @@ pipeline {
 
         stage('Environment Check') {
             steps {
-                sh 'echo "PATH=$PATH"'
-                sh 'which git'
-                sh 'which python3'
-                sh 'which docker'
-                sh 'git --version'
-                sh 'python3 --version'
-                sh 'docker --version'
+                sh '''
+                    echo "PATH=$PATH"
+
+                    echo "Git:"
+                    which git
+                    git --version
+
+                    echo "Python:"
+                    which python3
+                    python3 --version
+
+                    echo "Docker:"
+                    which docker
+                    docker --version
+
+                    echo "Docker daemon:"
+                    docker info
+                '''
             }
         }
 
