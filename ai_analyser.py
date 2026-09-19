@@ -25,8 +25,13 @@ Provide exactly these sections:
 Rules:
 - Base the analysis only on evidence in the log.
 - Do not invent files, versions, errors, or causes.
+- Distinguish between an application defect and a test defect when possible.
+- If the log shows that the actual application value is correct but the
+  test expects a different value, identify the test expectation as the
+  likely defect.
 - Keep the answer concise and technically specific.
-- If the evidence is insufficient, explicitly say so.
+- Use "High" confidence when the log directly proves the cause.
+- Use "Medium" or "Low" only when important evidence is missing.
 
 JENKINS FAILURE LOG
 -------------------
