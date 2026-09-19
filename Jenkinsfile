@@ -83,6 +83,7 @@ pipeline {
         always {
             sh '''
                 docker rm -f "$CONTAINER_NAME" 2>/dev/null || true
+		docker image rm -f "$IMAGE_NAME" 2>/dev/null || true
             '''
 
             archiveArtifacts artifacts: '*.log',
@@ -95,6 +96,18 @@ pipeline {
 
         failure {
             echo 'CI/CD PIPELINE FAILED'
+	    echo 'Starting AI failure analysis...'
+	    
+            sh '''
+		python3 ai_analyzer.py test-results.log \
+     	            > ai-analysis.txt 2>&1 || true
+            '''
+	    
+            archiveArtifacts artifacts: 'ai-analysis.txt',
+                    	     allowEmptyArchive: true
+
+    	    sh 'cat ai-analysis.txt'
+	
         }
     }
 }
